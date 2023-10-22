@@ -3,7 +3,7 @@ import exception.CarteExpirationException;
 
 import java.text.ParseException;
 
-public class main {
+public class carteCadeau {
 
     public static void main(String[] args) throws ParseException, CarteExpirationException {
         //TODO:Lancer l'application et laisser vous guider, saisisez les champs pour determiner les differents soldes
