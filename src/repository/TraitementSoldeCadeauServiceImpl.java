@@ -1,5 +1,6 @@
 package repository;
 
+import Interface.traitementRepository;
 import entity.CompteUtilisateur;
 import exception.CarteExpirationException;
 
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * Implementation des traitements pour le calcul du solde et la valeur des cadeaux
  */
-public class TraitementSoldeCadeauServiceImpl {
+public class TraitementSoldeCadeauServiceImpl implements traitementRepository {
 
     private static String pattern="dd/MM/yyyy";
 
@@ -68,7 +69,7 @@ public class TraitementSoldeCadeauServiceImpl {
      * @return
      * @throws ParseException
      */
-    private Date determinerdateExpirationCadeau(Date dateSaisie) throws ParseException {
+    public Date determinerdateExpirationCadeau(Date dateSaisie) throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat(pattern);
         String date = formatDate.format(dateSaisie);
         int nombresJrsAvantExpiration = 365;
@@ -86,7 +87,7 @@ public class TraitementSoldeCadeauServiceImpl {
      * @return
      * @throws ParseException
      */
-    private Date determinerdateExpirationSoldeTicket(Date dateSaisie) throws ParseException {
+    public Date determinerdateExpirationSoldeTicket(Date dateSaisie) throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat(pattern);
         String date = formatDate.format(dateSaisie);
         Date instanceDate = formatDate.parse(date);
@@ -101,7 +102,7 @@ public class TraitementSoldeCadeauServiceImpl {
      * @return
      * @throws ParseException
      */
-    private Date dateJoursimpleFormat() throws ParseException {
+    public Date dateJoursimpleFormat() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         String date = dateFormat.format(new Date());
         Date dateInstance = dateFormat.parse(date);

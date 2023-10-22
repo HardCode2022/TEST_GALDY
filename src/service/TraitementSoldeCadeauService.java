@@ -1,5 +1,6 @@
 package service;
 
+import Interface.traitementRepository;
 import entity.CompteUtilisateur;
 import exception.CarteExpirationException;
 import repository.TraitementSoldeCadeauServiceImpl;
@@ -11,7 +12,7 @@ public class TraitementSoldeCadeauService {
 
     private static Logger LOGGER =Logger.getLogger(String.valueOf(TraitementSoldeCadeauService.class));
 
-    private TraitementSoldeCadeauServiceImpl repository;
+    private traitementRepository repository;
 
     public TraitementSoldeCadeauService( ) {
         this.repository = new  TraitementSoldeCadeauServiceImpl();
@@ -24,8 +25,8 @@ public class TraitementSoldeCadeauService {
      * @throws ParseException
      * @throws CarteExpirationException
      */
-    public double calculsoldeCadeau(CompteUtilisateur utilisateur) throws ParseException, CarteExpirationException {
-        double calculDeSolde = 0;
+    public double calculsoldeCadeau(CompteUtilisateur utilisateur) throws ParseException {
+        double calculDeSolde = 0D;
         try {
             calculDeSolde = repository.calculSoldeCadeau(utilisateur);
         } catch (CarteExpirationException e) {
@@ -41,8 +42,8 @@ public class TraitementSoldeCadeauService {
      * @throws ParseException
      * @throws CarteExpirationException
      */
-    public double calculValeurToutTicketRestaurant(CompteUtilisateur utilisateur) throws ParseException, CarteExpirationException {
-        double calculDeSoldeToutCompte = 0;
+    public double calculValeurToutTicketRestaurant(CompteUtilisateur utilisateur) throws ParseException {
+        double calculDeSoldeToutCompte = 0D;
         try {
             calculDeSoldeToutCompte = repository.calculSoldeTicketRestaurant( utilisateur);
         } catch (CarteExpirationException e) {

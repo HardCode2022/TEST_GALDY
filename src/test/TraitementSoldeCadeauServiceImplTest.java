@@ -1,21 +1,18 @@
 package test;
 
+import Interface.traitementRepository;
 import entity.CompteUtilisateur;
 import exception.CarteExpirationException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import repository.TraitementSoldeCadeauServiceImpl;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 class TraitementSoldeCadeauServiceImplTest {
 
-    private static TraitementSoldeCadeauServiceImpl traitementSoldeCadeauService;
+    private static traitementRepository traitementSoldeCadeauService;
 
     private CompteUtilisateur utilisateur;
 
@@ -31,7 +28,7 @@ class TraitementSoldeCadeauServiceImplTest {
         double solde=traitementSoldeCadeauService.calculSoldeCadeau(utilisateur);
         Assertions.assertAll(
                 ()->Assertions.assertNotNull(solde),
-                ()->Assertions.assertEquals(solde,100.0)
+                ()->Assertions.assertEquals(100.0,solde)
         );
     }
 
@@ -41,7 +38,7 @@ class TraitementSoldeCadeauServiceImplTest {
         CarteExpirationException exception = Assertions.assertThrows(CarteExpirationException.class, () -> {
             double solde=traitementSoldeCadeauService.calculSoldeCadeau(testUtils.genererUtilisateurAvecExpiration());
             Assertions.assertAll(
-                    ()->Assertions.assertEquals(solde,0.0)
+                    ()->Assertions.assertEquals(0.0,solde)
             );
         });
         Assertions.assertEquals("Attention, la valeur du solde cadeau n'est plus comptabilsé", exception.getMessage());
@@ -54,7 +51,7 @@ class TraitementSoldeCadeauServiceImplTest {
         double solde=traitementSoldeCadeauService.calculSoldeTicketRestaurant(utilisateur);
         Assertions.assertAll(
                 ()->Assertions.assertNotNull(solde),
-                ()->Assertions.assertEquals(solde,50.0)
+                ()->Assertions.assertEquals(50.0,solde)
         );
     }
     @org.junit.jupiter.api.Test
@@ -63,7 +60,7 @@ class TraitementSoldeCadeauServiceImplTest {
         CarteExpirationException exception = Assertions.assertThrows(CarteExpirationException.class, () -> {
             double solde=traitementSoldeCadeauService.calculSoldeTicketRestaurant(testUtils.genererUtilisateurAvecExpiration());
             Assertions.assertAll(
-                    ()->Assertions.assertEquals(solde,0.0)
+                    ()->Assertions.assertEquals(0.0,solde)
             );
         });
         Assertions.assertEquals("Attention, la valeur du solde ticket n'est plus comptabilisé", exception.getMessage());
@@ -75,10 +72,10 @@ class TraitementSoldeCadeauServiceImplTest {
         double soldeTicket=traitementSoldeCadeauService.calculSoldeTicketRestaurant(utilisateur);
         Assertions.assertAll(
                 ()->Assertions.assertNotNull(soldeCadeau),
-                ()->Assertions.assertEquals(soldeCadeau,100.0),
+                ()->Assertions.assertEquals(100.0,soldeCadeau),
                 ()->Assertions.assertNotNull(soldeTicket),
-                ()->Assertions.assertEquals(soldeTicket,50.0),
-                ()->Assertions.assertEquals(soldeTicket+soldeCadeau,150.0)
+                ()->Assertions.assertEquals(50.0,soldeTicket),
+                ()->Assertions.assertEquals(150.0,soldeTicket+soldeCadeau)
         );
     }
     @org.junit.jupiter.api.Test
@@ -88,9 +85,9 @@ class TraitementSoldeCadeauServiceImplTest {
         CarteExpirationException exception = Assertions.assertThrows(CarteExpirationException.class, () -> {
             double soldeTicket=traitementSoldeCadeauService.calculSoldeTicketRestaurant(testUtils.genererUtilisateurAvecExpiration());
             Assertions.assertAll(
-                    ()->Assertions.assertEquals(soldeCadeau,100.0),
-                    ()->Assertions.assertEquals(soldeTicket,0.0),
-                    ()->Assertions.assertEquals(soldeTicket+soldeCadeau,100.0)
+                    ()->Assertions.assertEquals(100.0,soldeCadeau),
+                    ()->Assertions.assertEquals(0.0,soldeTicket),
+                    ()->Assertions.assertEquals(100.0,soldeTicket+soldeCadeau)
             );
         });
         Assertions.assertEquals("Attention, la valeur du solde ticket n'est plus comptabilisé", exception.getMessage());
