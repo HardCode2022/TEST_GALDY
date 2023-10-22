@@ -1,16 +1,17 @@
 package service;
 
 import Interface.traitementRepository;
+import com.sun.istack.logging.Logger;
 import entity.CompteUtilisateur;
 import exception.CarteExpirationException;
 import repository.TraitementSoldeCadeauServiceImpl;
 
 import java.text.ParseException;
-import java.util.logging.Logger;
+
 
 public class TraitementSoldeCadeauService {
 
-    private static Logger LOGGER =Logger.getLogger(String.valueOf(TraitementSoldeCadeauService.class));
+    private static Logger LOGGER = Logger.getLogger(TraitementSoldeCadeauService.class);
 
     private traitementRepository repository;
 
